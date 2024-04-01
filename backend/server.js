@@ -6,10 +6,11 @@ import connectToDb from "./db/connectToDb.js";
 import messageRoutes from './routes/message.routes.js'
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route.js";
+import {app , server} from './socket/socket.js'
 
 
 // Creating the app server
-const app = express();
+// const app = express();
 dotenv.config();
 app.use(express.json()) ;   // to parse the incomming requets with json payloads  (from req.body ); 
 app.use(cookieParser());
