@@ -7,7 +7,11 @@ import messageRoutes from './routes/message.routes.js'
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route.js";
 import {app , server} from './socket/socket.js'
+import path from "path";
 
+
+// implementing stufffs ...
+const __dirname = path.resolve();
 
 // Creating the app server
 // const app = express();
@@ -17,17 +21,25 @@ app.use(cookieParser());
 // Using the enviourment vaiables ...
 const PORT = process.env.PORT || 5000;
 
+
+
 // Middleware ...
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
+app.use(express.static(path.join(__dirname, "/fronted/dist")));
 
-// Routes ...
-app.get("/", (req, res) => {
-  //  root route http://localhost:5000
-  res.send("Hello World !!");
-});
+app.get("*" , (req,res)=>{
+  res.sendFile(path.join(__dirname, "fronted","dist","index.html"));
+})
+
+
+// // Routes ...
+// app.get("/", (req, res) => {
+//   //  root route http://localhost:5000
+//   res.send("Hello World !!");
+// });
 
 
 
